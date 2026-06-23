@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class ContadorTexto {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese el texto:");
+        String texto = sc.nextLine();
+
+        int caracteres = 0;
+        int palabras = 0;
+        int oraciones = 0;
+        boolean dentroPalabra = false;
+
+        for (char c : texto.toCharArray()) {
+            // Contar caracteres (sin espacios, tabulaciones ni saltos de línea)
+            if (c != ' ' && c != '\t' && c != '\n') {
+                caracteres++;
+            }
+
+            // Detectar palabras
+            if (c != ' ' && c != '\t' && c != '\n') {
+                if (!dentroPalabra) {
+                    palabras++;
+                    dentroPalabra = true;
+                }
+            } else {
+                dentroPalabra = false;
+            }
+
+            // Detectar oraciones
+            if (c == '.' || c == '?' || c == '!') {
+                oraciones++;
+            }
+        }
+
+        System.out.println("Numero de caracteres (sin espacios): " + caracteres);
+        System.out.println("Numero de palabras: " + palabras);
+        System.out.println("Numero de oraciones: " + oraciones);
+
+        sc.close();
+    }
+}
